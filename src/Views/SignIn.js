@@ -11,11 +11,12 @@ const SignIn = () => {
     let { register, handleSubmit, setError, formState: { errors } } = useForm();
     let moveTo = useNavigate();
 
+    const baseUrl = "http://localhost:4500"
 
     const saveData = async(meraData) => {    // getting the user from backend ....///
         try {
-            await axios.post("/signin", meraData).then((response) => {
-                // {console.log(response.data)}
+            await axios.post(baseUrl + "/signin", meraData).then((response) => {
+                {console.log(response.data)}
                 if (response.data.user) {
                     let user = response.data.user;
                     localStorage.setItem("someToken",response.data.myToken);

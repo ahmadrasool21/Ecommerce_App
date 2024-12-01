@@ -13,6 +13,7 @@ import ProductAdd from "./Views/ProductAdd"
 import ProductEdit from "./Views/ProductEdit"
 import Products from "./Views/Products"
 
+
 // importing hooks//
 
 import { useEffect } from 'react';
@@ -38,7 +39,9 @@ function App() {
 
       const fetchData= async()=>{
       try {
+        console.log("app.js try")
         const res = await axios.get(apiUrl);
+        console.log(res,"hi res")
         dispatch(setterfunction(res.data));  /// dispatching response and update the product state...
       }
         catch(error){
@@ -49,7 +52,8 @@ function App() {
     },[]);
 }
 
-const apiUrl="/api/products"        /// local api to get data from the backend mongodb ///..
+const port = 4500;
+const apiUrl="http://localhost:" + port + "/api/products"      /// local api to get data from the backend mongodb ///..
 useFetchData(apiUrl,setProducts)   /// calling the api function and thus useEffect will be called ///..
 
 

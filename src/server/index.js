@@ -102,7 +102,7 @@ app.post("/signup", async(req,res) => {              /// for registering the use
     try {
         const {email,password,first_name,last_name} = req.body;      //// destructure DATA from the object ////
 
-        // Find the user with the provided email ////
+        // Find the user with the provided email /////api/products
         let user = await Users.findOne({email:email});
         if (!user) {
             /// creating a new user in a database///
@@ -130,7 +130,7 @@ app.post("/signup", async(req,res) => {              /// for registering the use
 
 
 /////////////////////                    for  sign in the user API       / ///////////////////
-app.post("/signin", async(req, res) => {
+app.post("/signin", async(req,res) => {
     try {
         console.log("Hi request")
         const { email, password } = req.body;
@@ -149,7 +149,7 @@ app.post("/signin", async(req, res) => {
                 });
             }
          )} catch (error) {
-        console.log(error.message);
+        console.log(error.message,"/////////////////////////");
         res.status(500).json({ error: error.message });
     }
 });
@@ -278,8 +278,10 @@ try{
 
 app.get('/api/products', async(req,res) => {                 //// for getting products from database ////
     try{
+        console.log("Debugging")
     // Check if products are already in the database
     let products = await ProductsData.find();
+    console.log("products are present")
 
     if(products.length===0){
          // If no products are found, fetch from online API   
@@ -294,7 +296,8 @@ app.get('/api/products', async(req,res) => {                 //// for getting pr
     res.status(200).json(products)
     
     } catch(error){
-        res.status(404).json(error)  
+        res.status(404).json(error)
+        console.log("apinproduct url")  
     }
 })
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
